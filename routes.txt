@@ -1,0 +1,3 @@
+http://localhost:5000/data/allproperties #get property list
+http://localhost:5000/data/addProperty #post property 
+http://localhost:5000/data #check whether its up

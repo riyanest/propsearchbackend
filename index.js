@@ -1,33 +1,30 @@
 const express = require('express');
 const env = require('dotenv');
+const cors = require('cors');
 const { json } = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const result = env.config();
 const bodyParser =require('body-parser');
+app.use(cors());
+app.use(bodyParser.urlencoded({ 
+    extended: true 
+}));
+app.use(bodyParser.json());
+const mongoose = require('mongoose'); 
+const result = env.config();
 env.config();
-//const routes = require('./routes/data');
-const authroute=require('./routes/auth');
-const cors = require('cors');
+
 
 mongoose.connect(
-    'mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@propsearchbackend.yohsd.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority',
-     {
-         useNewUrlParser: true,
-         useUnifiedTopology: true
-     }).then(()=>{
-         console.log("database connected");
-     });
-
-app.use(cors());
-app.use(bodyParser());
-app.use('/auth',authroute);
-
-app.post('/data',(req,res,nest)=>{
-    res.status(200).json({
-        message: req.body
+     'mongodb+srv://lappy:7MZlsX2l8DylW2GL@propsearchbackend.yohsd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+      }).then(()=>{
+          console.log("database connected"); 
     });
-});
+
+app.use('/auth',require('./routes/auth'));
+app.use('/data', require('./routes/data'));   
 
 app.get('/',(req,res,nest)=>{
     res.status(200).json({
@@ -41,4 +38,4 @@ app.listen(process.env.PORT,()=>{
       }
     console.log(result.parsed);
     console.log(`server is running on port ${process.env.PORT}`);
-});
+}); 
