@@ -2,7 +2,7 @@ const User= require('../models/user');
 const jwt = require('jsonwebtoken');
 exports.signup = (req,res) => {
     User.findOne({email:req.body.email}).exec((error,user)=>{
-        if(req.body.firstName==null||req.body.lastName==null||req.body.email==null||req.body.password==null){
+        if(req.body.firstname==null||req.body.lastname==null||req.body.email==null||req.body.password==null){
             res.status(400).json({
                 message:'wrong input'
             });
@@ -14,15 +14,15 @@ exports.signup = (req,res) => {
         }
 
         const {
-            firstName,
-            lastName,
+            firstname,
+            lastname,
             email,
             password
         } = req.body;
     
         const _user =  new User({
-            firstName,
-            lastName,
+            firstname,
+            lastname,
             email,
             password,
             username: Math.random().toString()  
@@ -46,14 +46,14 @@ exports.signup = (req,res) => {
 exports.signin = (req,res) => {
     User.findOne({email:req.body.email})
     .exec((error,user)=>{
-        if(error) return res.status(401).json({error});
+        if(error) return res.status(400).json({error});
         if(user){
             if(user.authenticate(req.body.password)){
                 const token=jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1h'});
-                const {_id,firstName,lastName,email,role,fullName}=user;
+                const {_id,firstname,lastname,email,role}=user;
                 res.status(200).json({
                     token,
-                    user:{_id,firstName,lastName,email,role,fullName}
+                    user:{_id,firstname,lastname,email,role}
                 });
             }
             else{
@@ -62,14 +62,16 @@ exports.signin = (req,res) => {
                 });
             }
         }
-        else if(user.length>1){
-            return res.status(401).json({
-                message:'auth failed'
-            });
-        }
         else{
-            return res.status(401).json({error});
+            return res.status(400).json({error});
         }
     });
 }
 
+exports.requireSignin=(req,res,next)=>{
+    const token=req.headers.authorization.split(" ")[1];
+    const user = jwt.verify(token,process.env.JWT_SECRET);
+    req.user = user;
+    next();
+    //    jwt.decode()
+}

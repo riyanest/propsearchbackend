@@ -1,21 +1,18 @@
 const express = require('express');
-const env = require('dotenv');
+require('dotenv').config({});
 const cors = require('cors');
 const { json } = require('express');
 const app = express();
 const bodyParser =require('body-parser');
 app.use(cors());
-app.use(bodyParser.urlencoded({ 
-    extended: true 
-}));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
 const mongoose = require('mongoose'); 
-const result = env.config();
-env.config();
-
-
+const user=process.env.MONGO_DB_USER;
+const password=process.env.MONGO_DB_PASSWORD;
+const database=process.env.MONGO_DB_DATABASE;
 mongoose.connect(
-     'mongodb+srv://lappy:7MZlsX2l8DylW2GL@propsearchbackend.yohsd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+     `mongodb+srv://${user}:${password}@propsearchbackend.yohsd.mongodb.net/${database}?retryWrites=true&w=majority`,
       {
           useNewUrlParser: true,
           useUnifiedTopology: true
@@ -32,10 +29,9 @@ app.get('/',(req,res,nest)=>{
     });
 });
 
-app.listen(process.env.PORT,()=>{
-    if (result.error) {
-        throw result.error
-      }
-    console.log(result.parsed);
+app.listen(process.env.PORT,function(err){
+    if (err) {
+        throw err    
+      } 
     console.log(`server is running on port ${process.env.PORT}`);
 }); 

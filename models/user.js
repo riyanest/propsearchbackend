@@ -2,20 +2,21 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    firstName:{
+    firstname:{
         type :String,
         required: true,
         trim:true,
         min:3,
         max:20
     },
-    lastName:{
+    lastname:{
         type :String,
         required: true,
         trim:true,
         min:3,
         max:20
     },
+
     username: {
         type: String,
         required:true,
@@ -44,7 +45,7 @@ const userSchema = new mongoose.Schema({
         type:Number,
         required:false
     },
-    contactNumber:{type:String},
+    contactnumber:{type:String},
     profilePicture:{type:String}
 },{timstamp:true});
 
@@ -54,7 +55,7 @@ userSchema.virtual('password').set(function(password){
 
 userSchema.virtual('fullName')
 .get(function(){
-    return `${this.firstName} ${this.lastName}`;
+    return `${this.firstname} ${this.lastname}`;
 });
 
 userSchema.methods = {

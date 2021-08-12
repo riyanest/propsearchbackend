@@ -18,24 +18,45 @@ router.get("/allProperties", async function (req, res) {
 
   router.post("/addProperty", async function (req, res) {
         
-            if(req.body.bhksize==null||req.body.area==null||req.body.price==null||req.body.floor==null){
+            if(req.body.Bhksize==null||req.body.Area==null||req.body.price==null||req.body.floor==null){
                 res.status(400).json({
                     message:'wrong input'
                 });
             }
             else{
-                const {
-                    bhksize,
-                    area,
-                    price,
-                    floor
-                } = req.body;
+                // const {
+                //     Bhksize,
+                //     Area,
+                //     price,
+                //     floor
+                // } = req.body;
             
                 const _property =  new property({
-                    bhksize:req.body.bhksize,
-                    area:req.body.area,
-                    price:req.body.price,
-                    floor:req.body.floor
+                        propertyProfile:req.body.propertyProfile,
+                        ApartmentType:req.body.ApartmentType,
+                        Propertytype:req.body.Propertytype,
+                        facing:req.body.facing,
+                        floorType:req.body.floorType,
+                        Bhksize:req.body.Bhksize,
+                        Area:req.body.Area,
+                        floor:req.body.floor,
+                        floorinblid:req.body.floorinblid,
+                        age:req.body.age,
+                        price:req.body.price,
+                        rent:req.body.rent,
+                        maintainence:req.body.maintainence,
+                        furnishType:req.body.furnishType,
+                        availabilitydate:req.body.availabilitydate,
+                        streetAddress:req.body.streetAddress,
+                        homeAddress:req.body.homeAddress,
+                        city:req.body.city,
+                        ZipCode:req.body.ZipCode,
+                        addressdescription:req.body.addressdescription,
+                        bathrooms:req.body.bathrooms,
+                        balcony:req.body.balcony,
+                        cupboard:req.body.cupboard,
+                        ameneties:req.body.ameneties,
+                        housingsystemdescription:req.body.housingsystemdescription,
                 });
                 _property.save((error,data)=>{
                     if(error){

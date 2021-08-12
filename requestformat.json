@@ -1,0 +1,30 @@
+{
+    "propertyProfile":"sell",
+    "ApartmentType":["Bungalow"],
+    "Propertytype":["residential"],
+    "facing":["West"],
+    "floorType":["cement"],
+    "Bhksize":2,
+    "Area":2,
+    "floor":2,
+    "floorinblid":2,
+    "age":2019,
+    "price":2,
+    "rent":2,
+    "maintainence":2,
+    "furnishType":["unfurnished"],
+    "availabilitydate":"2021-08-22T06:33:39.572Z",
+    "streetAddress":"s",
+    "homeAddress":"s",
+    "city":["India","Maharashtra","Mumbai"],
+    "ZipCode":"s",
+    "addressdescription":"s",
+    "bathrooms":1,
+    "balcony":1,
+    "cupboard":1,
+    "ameneties":["rainWaterHarvesting"],
+    "housingsystemdescription":"e"
+}
+
+
+{"_id":{"$oid":"610e1b4735a4fd27c4e3acfc"},"apartmentType":[],"Propertytype":["residential"],"facing":["West"],"floorType":["cement"],"furnishType":["unfurnished"],"city":["India","Maharashtra","Mumbai"],"ameneties":["rainWaterHarvesting"],"propertyProfile":"sell","Bhksize":{"$numberInt":"2"},"Area":{"$numberInt":"2"},"floor":{"$numberInt":"2"},"floorinblid":{"$numberInt":"2"},"age":{"$numberInt":"2019"},"price":{"$numberInt":"2"},"rent":{"$numberInt":"2"},"maintainence":{"$numberInt":"2"},"availabilitydate":{"$date":{"$numberLong":"1629614019572"}},"streetAddress":"s","homeAddress":"s","addressdescription":"s","balcony":{"$numberInt":"1"},"cupboard":{"$numberInt":"1"},"housingsystemdescription":"e","__v":{"$numberInt":"0"}}
