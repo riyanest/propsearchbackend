@@ -3,20 +3,19 @@ const mongoose = require('mongoose');
 const property = new mongoose.Schema({
     // hometype:{
     //     type:String,
-    //     required:true,
     //     trim:true
     // },
     // housingsystem:{
     //     type:String,
     // },
-    // housingsystemdescription:{ 
-    //     type:String,
-    // },
-    // address:{
-    //     type :String,
-    //     required: true,
-    //     trim:true
-    // },
+    housingsystemdescription:{ 
+        type:String,
+    },
+    address:{
+        type :String,
+        required: true,
+        trim:true
+    },
     bhksize:{
         type :Number,
         required: true,
@@ -24,7 +23,7 @@ const property = new mongoose.Schema({
         max:20
     },
     area: {
-        type: String,
+        type: Number,
         required:true,
         trim: true,
     },
@@ -46,32 +45,32 @@ const property = new mongoose.Schema({
     //     authornumber:{type:Number},
     
     // },
-    // ameneties:{
-    //   park:{
-    //       type:Boolean
-    //   },
-    //   parking:{
-    //     type:Boolean
-    //   },
-    //   lift:{
-    //     type:Boolean
-    //   },
-    //   suburban:{
-    //     type:Boolean
-    //   },
-    //   city:{
-    //     type:Boolean
-    //   },
-    //   garden:{
-    //     type:Boolean
-    //   },
-    //   pool:{
-    //     type:Boolean
-    //   },
-    //   gymnasium:{
-    //     type:Boolean
-    //   },  
-    // }
+    ameneties:{
+      park:{
+          type:Boolean
+      },
+      parking:{
+        type:Boolean
+      },
+      lift:{
+        type:Boolean
+      },
+      suburban:{
+        type:Boolean
+      },
+      city:{
+        type:Boolean
+      },
+      garden:{
+        type:Boolean
+      },
+      pool:{
+        type:Boolean
+      },
+      gymnasium:{
+        type:Boolean
+      },  
+    }
 },{timstamp:true}
 );
 

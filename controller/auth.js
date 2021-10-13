@@ -1,6 +1,10 @@
 const User= require('../models/user');
+const AppliedUser= require('../models/applieduser');
 const jwt = require('jsonwebtoken');
-exports.signup = (req,res) => {
+const env = require('dotenv');
+const result = env.config();
+env.config();
+exports.signup =(req,res) => {
     User.findOne({email:req.body.email}).exec((error,user)=>{
         if(req.body.firstName==null||req.body.lastName==null||req.body.email==null||req.body.password==null){
             res.status(400).json({
@@ -20,7 +24,7 @@ exports.signup = (req,res) => {
             password
         } = req.body;
     
-        const _user =  new User({
+        const _user =  new AppliedUser({
             firstName,
             lastName,
             email,
@@ -49,7 +53,7 @@ exports.signin = (req,res) => {
         if(error) return res.status(401).json({error});
         if(user){
             if(user.authenticate(req.body.password)){
-                const token=jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1h'});
+                const token=jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'}); 
                 const {_id,firstName,lastName,email,role,fullName}=user;
                 res.status(200).json({
                     token,
