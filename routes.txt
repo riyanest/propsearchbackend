@@ -1,0 +1,16 @@
+http://localhost:5000/data/allproperties #get property list
+http://localhost:5000/data/addProperty #post property 
+http://localhost:5000/data #check whether its up
+
+
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZiZWJhMDVjYTQzYTE3NTg1YzdhZjEiLCJpYXQiOjE2MzQwNDYxNzUsImV4cCI6MTYzNDY1MDk3NX0.zdzjq5oz00O6gMloEfaknr4yZ2uB5UxOkgez4Cwb4L8",
+  "user": {
+    "_id": "60fbeba05ca43a17585c7af1",
+    "email": "riyanq95@gmail.com",
+    "role": "user",
+    "fullName": "undefined undefined"
+  }
+}
+
