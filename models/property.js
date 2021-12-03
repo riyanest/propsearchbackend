@@ -1,43 +1,77 @@
 const mongoose = require('mongoose');
 
 const property = new mongoose.Schema({
-    // hometype:{
-    //     type:String,
-    //     trim:true
-    // },
-    // housingsystem:{
-    //     type:String,
-    // },
-    housingsystemdescription:{ 
-        type:String,
-    },
-    address:{
-        type :String,
+apartmentType:{
+  type:String,
+  required:true,
+},
+propertyProfile:{
+  type: Object,
         required: true,
-        trim:true
-    },
-    bhksize:{
-        type :Number,
+  status:{
+    type:String,
+    required:true,
+  },
+  price: {
+    type:Number,
+    required:true,
+  },
+  rent:Number,
+},
+facing:{
+  type:String,
+},
+floor:Number,
+furnish:String,
+floorinblid:Number,
+age:{
+  type:Date,
+  required:true,
+},
+uploaddate: { type: Date, default: Date.now },
+maintainence:{
+  type:Number,
+  required:true,
+},
+availabilitydate:Date,
+public:{
+  type:Boolean,
+  required: true,
+},
+address:{
+  type: Object,
         required: true,
-        min:1,
-        max:20
+    streetAddress:{
+      type:String,
+      required:true,
     },
-    area: {
-        type: Number,
-        required:true,
-        trim: true,
+    homeAddress:{
+      type:String,
+      required:true,
     },
-    price: {
-        type:Number,
-        required:true,
-        trim:true,
-        unique:true,
-        lowercase:true
+    location:{
+      type:String,
+      required:true,
     },
-    floor:{
-        type:Number,
-        required:false,
-    },
+    cord:{
+    type:Object,
+    required:true,
+    x:Number,
+    y:Number},
+},
+bhksize:{
+    type :Number,
+    required: true,
+},
+area: {
+    type: Number,
+    required:true,
+    trim: true,
+},
+floor:{
+    type:Number,
+    required:false,
+},
     // author:{
     //     authorid:{
     //         type:Number},
@@ -45,33 +79,20 @@ const property = new mongoose.Schema({
     //     authornumber:{type:Number},
     
     // },
-    ameneties:{
-      park:{
-          type:Boolean
-      },
-      parking:{
-        type:Boolean
-      },
-      lift:{
-        type:Boolean
-      },
-      suburban:{
-        type:Boolean
-      },
-      city:{
-        type:Boolean
-      },
-      garden:{
-        type:Boolean
-      },
-      pool:{
-        type:Boolean
-      },
-      gymnasium:{
-        type:Boolean
-      },  
-    }
+ameneties:{
+  type: Object,
+  balcony:Number,
+  cupboard:Number,
+  park:Boolean,
+  parking:Boolean,
+  lift:Boolean,
+  suburban:Boolean,
+  city:Boolean,
+  garden:Boolean,
+  pool:Boolean,
+  gymnasium:Boolean,  
+}
 },{timstamp:true}
 );
 
-module.exports= mongoose.model('propertyobj',property);
+module.exports= mongoose.model('properties',property);

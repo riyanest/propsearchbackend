@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 const mongoose = require('mongoose'); 
 const result = env.config();
 env.config();
-
+ 
 
 mongoose.connect(
      'mongodb+srv://lappy:7MZlsX2l8DylW2GL@propsearchbackend.yohsd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',

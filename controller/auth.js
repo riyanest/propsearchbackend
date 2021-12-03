@@ -54,10 +54,10 @@ exports.signin = (req,res) => {
         if(user){
             if(user.authenticate(req.body.password)){
                 const token=jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'}); 
-                const {_id,firstName,lastName,email,role,fullName}=user;
+                const {_id,firstname,lastname,email,rootpower,username}=user;
                 res.status(200).json({
                     token,
-                    user:{_id,firstName,lastName,email,role,fullName}
+                    user:{_id,firstname,lastname,email,rootpower,username}
                 });
             }
             else{
