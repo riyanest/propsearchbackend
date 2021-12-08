@@ -3,6 +3,28 @@ const express = require("express");
 const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
+var multer  = require('multer');
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, '../public/');
+    },
+    filename: (req, file, cb) => {
+      console.log(file);
+      var filetype = '';
+      if(file.mimetype === 'image/gif') {
+        filetype = 'gif';
+      }
+      if(file.mimetype === 'image/png') {
+        filetype = 'png';
+      }
+      if(file.mimetype === 'image/jpeg') {
+        filetype = 'jpg';
+      }
+      cb(null, 'image-' + Date.now() + '.' + filetype);
+    }
+});
+var upload = multer({storage: storage});
+
 router.get("/", (req, res, nest) => {
   res.status(200).json({
     message: "hello from server"
