@@ -75,7 +75,7 @@ router.get("/specificProperties", async function(req, res) {
   }
 });
 
-router.post("/addProperty", requireSignin, async function(req, res) {
+router.post("/addProperty", requireSignin,multipleuploads, async function(req, res) {
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
@@ -85,7 +85,10 @@ router.post("/addProperty", requireSignin, async function(req, res) {
     res.status(400).json({
       message: "wrong input"
     });
-  } else {
+  }
+  else if(req.files){
+    console.log("uploaded")
+  }else {
     const { bhksize, area, price, floor } = req.body;
 
     const _property = new property({
