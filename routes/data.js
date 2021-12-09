@@ -74,12 +74,12 @@ router.get("/specificProperties", async function(req, res) {
     res.status(200).json({ properties: prop });
   }
 });
+// , requireSignin
 
-router.post("/addProperty", requireSignin,multipleuploads, async function(req, res) {
+router.post("/addProperty",multipleuploads, async function(req, res) {
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
-    req.body.price == null ||
     req.body.floor == null
   ) {
     res.status(400).json({
