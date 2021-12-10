@@ -24,9 +24,7 @@ var storage = multer.diskStorage({
   }
 });
 var upload = multer({ storage: storage });
-var multipleuploads = upload.fields([
-  { name: "image", maxCount: 7 }
-]);
+
 
 router.get("/", (req, res, nest) => {
   res.status(200).json({
@@ -78,7 +76,7 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty", multipleuploads, async function(req, res) {
+router.post("/addProperty", upload.array('image', 7), async function(req, res) {
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
