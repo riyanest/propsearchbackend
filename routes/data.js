@@ -95,7 +95,16 @@ router.post("/addProperty",multipleuploads, async function(req, res) {
       bhksize: req.body.bhksize,
       area: req.body.area,
       price: req.body.price,
-      floor: req.body.floor
+      floor: req.body.floor,
+      address:req.body.address,
+      public:req.body.public,
+      maintainence:req.body.maintainence,
+      age:req.body.age,
+      propertyProfile:req.body.propertyProfile,
+      apartmentType:req.body.apartmentType,
+      availabilitydate:req.body.availabilitydate,
+      balcony:req.body.balcony,
+      facing:req.body.facing,
     });
 
     _property.save((error, data) => {
