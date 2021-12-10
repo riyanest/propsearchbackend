@@ -3,28 +3,36 @@ const express = require("express");
 const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
-var multer  = require('multer');
+var multer = require("multer");
 var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, '../public/');
-    },
-    filename: (req, file, cb) => {
-      console.log(file);
-      var filetype = '';
-      if(file.mimetype === 'image/gif') {
-        filetype = 'gif';
-      }
-      if(file.mimetype === 'image/png') {
-        filetype = 'png';
-      }
-      if(file.mimetype === 'image/jpeg') {
-        filetype = 'jpg';
-      }
-      cb(null, 'image-' + Date.now() + '.' + filetype);
+  destination: (req, file, cb) => {
+    cb(null, "../public/");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    var filetype = "";
+    if (file.mimetype === "image/gif") {
+      filetype = "gif";
     }
+    if (file.mimetype === "image/png") {
+      filetype = "png";
+    }
+    if (file.mimetype === "image/jpeg") {
+      filetype = "jpg";
+    }
+    cb(null, "image-" + Date.now() + "." + filetype);
+  }
 });
-var upload=multer({storage:storage})
-var multipleuploads= upload.fields([{name:'file1'},{name:'file2'},{name:'file3'},{name:'file4'},{name:'file5'},{name:'file6'},{name:'file7',maxCount:7}])
+var upload = multer({ storage: storage });
+var multipleuploads = upload.fields([
+  { name: "file1" },
+  { name: "file2" },
+  { name: "file3" },
+  { name: "file4" },
+  { name: "file5" },
+  { name: "file6" },
+  { name: "file7", maxCount: 7 }
+]);
 
 router.get("/", (req, res, nest) => {
   res.status(200).json({
@@ -76,7 +84,7 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty",multipleuploads, async function(req, res) {
+router.post("/addProperty", multipleuploads, async function(req, res) {
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
@@ -85,26 +93,27 @@ router.post("/addProperty",multipleuploads, async function(req, res) {
     res.status(400).json({
       message: "wrong input"
     });
-  }
-  else if(req.files){
-    console.log("uploaded")
-  }else {
+  } else if (req.files) {
+    console.log("uploaded");
+  } else {
     const { bhksize, area, price, floor } = req.body;
 
     const _property = new property({
+      apartmentType: req.body.apartmentType,
+      propertyProfile: req.body.propertyProfile,
+      facing: req.body.facing,
+      floor: req.body.floor,
+      furnish: req.body.furnish,
+      floorinbld: req.body.floorinbld,
+      age: req.body.age,
+      maintainance: req.body.maintainence,
+      availabilitydate: req.body.availabilitydate,
+      public: req.body.public,
+      address: req.body.address,
       bhksize: req.body.bhksize,
       area: req.body.area,
-      price: req.body.price,
       floor: req.body.floor,
-      address:req.body.address,
-      public:req.body.public,
-      maintainence:req.body.maintainence,
-      age:req.body.age,
-      propertyProfile:req.body.propertyProfile,
-      apartmentType:req.body.apartmentType,
-      availabilitydate:req.body.availabilitydate,
-      balcony:req.body.balcony,
-      facing:req.body.facing,
+      ameneties: req.body.ameneties
     });
 
     _property.save((error, data) => {

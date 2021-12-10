@@ -1,13 +1,13 @@
-const axios = require('axios')
+const axios = require("axios");
 
 axios
-  .post('http://loacalhost:5000/', {
-    todo: 'Buy the milk'
+  .post("http://loacalhost:5000/", {
+    todo: "Buy the milk"
   })
   .then(res => {
-    console.log(`statusCode: ${res.status}`)
-    console.log(res)
+    console.log(`statusCode: ${res.status}`);
+    console.log(res);
   })
   .catch(error => {
-    console.error(error)
-  })
+    console.error(error);
+  });
