@@ -92,7 +92,7 @@ router.post("/addProperty", upload.array('image', 7), async function(req, res) {
 
     const _property = new property({
       apartmentType: req.body.apartmentType,
-      propertyProfile: req.body.propertyProfile,
+      propertyProfile: req.body.propertyProfile, 
       facing: req.body.facing,
       floor: req.body.floor,
       furnish: req.body.furnish,
