@@ -25,13 +25,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var multipleuploads = upload.fields([
-  { name: "file1" },
-  { name: "file2" },
-  { name: "file3" },
-  { name: "file4" },
-  { name: "file5" },
-  { name: "file6" },
-  { name: "file7", maxCount: 7 }
+  { name: "image", maxCount: 7 }
 ]);
 
 router.get("/", (req, res, nest) => {
