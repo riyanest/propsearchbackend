@@ -6,5 +6,4 @@ exports.requireSignin = (req, res, next) => {
   req.user = user;
   console.log(user);
   next();
-  //    jwt.decode()
 };

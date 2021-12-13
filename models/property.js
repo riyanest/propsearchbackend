@@ -31,8 +31,7 @@ const property = new mongoose.Schema(
     },
     uploaddate: { type: Date, default: Date.now },
     maintainence: {
-      type: Number,
-      required: true
+      type: Number
     },
     availabilitydate: Date,
     public: {
