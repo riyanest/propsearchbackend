@@ -124,8 +124,13 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
   }
 });
 
-router.post("/addProperty", uploadMultiple, async function(req, res) {
-  
+router.post("/addPic", uploadMultiple, async function(req, res) {
+  if(req.files){
+        return res.status(201).json({
+          msg: "added and uploaded",
+          data: req.files
+        });
+  }
 });
 
 router.post("/delProperty", requireSignin, async function(req, res) {
