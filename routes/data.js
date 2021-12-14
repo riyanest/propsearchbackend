@@ -25,7 +25,6 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-
 router.get("/", (req, res, nest) => {
   res.status(200).json({
     message: "hello from server"
@@ -76,7 +75,9 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty", upload.array('image', 7), async function(req, res) {
+var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }]);
+
+router.post("/addProperty", uploadMultiple, async function(req, res) {
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
@@ -92,7 +93,7 @@ router.post("/addProperty", upload.array('image', 7), async function(req, res) {
 
     const _property = new property({
       apartmentType: req.body.apartmentType,
-      propertyProfile: req.body.propertyProfile, 
+      propertyProfile: req.body.propertyProfile,
       facing: req.body.facing,
       floor: req.body.floor,
       furnish: req.body.furnish,
