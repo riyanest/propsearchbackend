@@ -4,9 +4,10 @@ const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
 var multer = require("multer");
+
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/");
+    cb(null, "public");
   },
   filename: (req, file, cb) => {
     console.log(file);
@@ -20,10 +21,12 @@ var storage = multer.diskStorage({
     if (file.mimetype === "image/jpeg") {
       filetype = "jpg";
     }
-    cb(null, "image-" + Date.now() + "." + filetype);
+    cb(null, file.fieldname + Date.now() + "." + filetype);
   }
 });
 var upload = multer({ storage: storage });
+
+var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }]);
 
 router.get("/", (req, res, nest) => {
   res.status(200).json({
@@ -75,8 +78,6 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }]);
-
 router.post("/addProperty", uploadMultiple, async function(req, res) {
   if (
     req.body.bhksize == null ||
@@ -86,9 +87,7 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
     res.status(400).json({
       message: "wrong input"
     });
-  } else if (req.files) {
-    console.log("uploaded");
-  } else {
+  }  else {
     const { bhksize, area, floor } = req.body;
 
     const _property = new property({
@@ -115,14 +114,18 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
           message: `${error}`
         });
       }
-      if (data) {
+      if (data&& req.files) {
         return res.status(201).json({
-          msg: "added",
+          msg: "added and uploaded",
           data: data
         });
       }
     });
   }
+});
+
+router.post("/addProperty", uploadMultiple, async function(req, res) {
+  
 });
 
 router.post("/delProperty", requireSignin, async function(req, res) {
