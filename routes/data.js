@@ -22,6 +22,7 @@ var storage = multer.diskStorage({
       filetype = "jpg";
     }
     cb(null, file.fieldname + Date.now() + "." + filetype);
+    images.push(file.fieldname + Date.now() + "." + filetype);
   }
 });
 var upload = multer({ storage: storage });
@@ -77,7 +78,7 @@ router.get("/specificProperties", async function(req, res) {
   }
 });
 // , requireSignin
-
+var images;
 router.post("/addProperty", uploadMultiple, async function(req, res) {
   if (
     req.body.bhksize == null ||
@@ -89,7 +90,7 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
     });
   }  else {
     const { bhksize, area, floor } = req.body;
-
+if(images!=null){
     const _property = new property({
       apartmentType: req.body.apartmentType,
       propertyProfile: req.body.propertyProfile,
@@ -105,7 +106,8 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
       bhksize: req.body.bhksize,
       area: req.body.area,
       floor: req.body.floor,
-      ameneties: req.body.ameneties
+      ameneties: req.body.ameneties,
+      images:images
     });
 
     _property.save((error, data) => {
@@ -122,6 +124,7 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
       }
     });
   }
+    }
 });
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
