@@ -6,7 +6,7 @@ const property = require("../models/property");
 var multer = require("multer");
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../public/");
+    cb(null, "public/");
   },
   filename: (req, file, cb) => {
     console.log(file);
@@ -89,7 +89,7 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
   } else if (req.files) {
     console.log("uploaded");
   } else {
-    const { bhksize, area, price, floor } = req.body;
+    const { bhksize, area, floor } = req.body;
 
     const _property = new property({
       apartmentType: req.body.apartmentType,
