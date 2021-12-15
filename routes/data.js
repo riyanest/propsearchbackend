@@ -4,7 +4,7 @@ const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
 var multer = require("multer");
-var images=[];
+var images = [];
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
     console.log(file);
     var filetype = "";
     if (file.mimetype === "image/gif") {
-      filetype = "gif"; 
+      filetype = "gif";
     }
     if (file.mimetype === "image/png") {
       filetype = "png";
@@ -87,53 +87,52 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
     req.body.floor == null
   ) {
     res.status(400).json({
-      message: "wrong input"
+      message: "wrong input"+req.body.bhksize+req.body.area+req.body.floor
     });
-  }  else {
-    const { bhksize, area, floor } = req.body;
-if(images!=null){
-    const _property = new property({
-      apartmentType: req.body.apartmentType,
-      propertyProfile: req.body.propertyProfile,
-      facing: req.body.facing,
-      floor: req.body.floor,
-      furnish: req.body.furnish,
-      floorinbld: req.body.floorinbld,
-      age: req.body.age,
-      maintainance: req.body.maintainence,
-      availabilitydate: req.body.availabilitydate,
-      public: req.body.public,
-      address: req.body.address,
-      bhksize: req.body.bhksize,
-      area: req.body.area,
-      floor: req.body.floor,
-      ameneties: req.body.ameneties,
-      images:images
-    });
+  } else {
+    if (images != null) {
+      const _property = new property({
+        apartmentType: req.body.apartmentType,
+        propertyProfile: req.body.propertyProfile,
+        facing: req.body.facing,
+        floor: req.body.floor,
+        furnish: req.body.furnish,
+        floorinbld: req.body.floorinbld,
+        age: req.body.age,
+        maintainance: req.body.maintainence,
+        availabilitydate: req.body.availabilitydate,
+        public: req.body.public,
+        address: req.body.address,
+        bhksize: req.body.bhksize,
+        area: req.body.area,
+        floor: req.body.floor,
+        ameneties: req.body.ameneties,
+        images: images
+      });
 
-    _property.save((error, data) => {
-      if (error) {
-        return res.status(400).json({
-          message: `${error}`
-        });
-      }
-      if (data&& req.files) {
-        return res.status(201).json({
-          msg: "added and uploaded",
-          data: data
-        });
-      }
-    });
-  }
+      _property.save((error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: `${error}`
+          });
+        }
+        if (data && req.files) {
+          return res.status(201).json({
+            msg: "added and uploaded",
+            data: data
+          });
+        }
+      });
     }
+  }
 });
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
-  if(req.files){
-        return res.status(201).json({
-          msg: "added and uploaded",
-          data: req.files
-        });
+  if (req.files) {
+    return res.status(201).json({
+      msg: "added and uploaded",
+      data: req.files
+    });
   }
 });
 
