@@ -4,6 +4,7 @@ const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
 var multer = require("multer");
+var images=[];
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -13,7 +14,7 @@ var storage = multer.diskStorage({
     console.log(file);
     var filetype = "";
     if (file.mimetype === "image/gif") {
-      filetype = "gif";
+      filetype = "gif"; 
     }
     if (file.mimetype === "image/png") {
       filetype = "png";
@@ -78,7 +79,7 @@ router.get("/specificProperties", async function(req, res) {
   }
 });
 // , requireSignin
-var images;
+
 router.post("/addProperty", uploadMultiple, async function(req, res) {
   if (
     req.body.bhksize == null ||
