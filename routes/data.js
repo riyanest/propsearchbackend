@@ -24,6 +24,7 @@ var storage = multer.diskStorage({
     }
     cb(null, file.fieldname + Date.now() + "." + filetype);
     images.push(file.fieldname + Date.now() + "." + filetype);
+    console.log(images)
   }
 });
 var upload = multer({ storage: storage });
@@ -107,7 +108,7 @@ router.post("/addProperty" , uploadMultiple, async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
-        images: req.image.path
+        images: images
       });
 
       _property.save((error, data) => {

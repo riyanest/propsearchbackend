@@ -69,7 +69,7 @@ const property = new mongoose.Schema(
       required: true,
       trim: true
     },
-    images:String,
+    images:Array,
     floor: {
       type: Number,
       required: false
