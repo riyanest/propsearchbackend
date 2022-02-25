@@ -69,11 +69,12 @@ const property = new mongoose.Schema(
       required: true,
       trim: true
     },
+    images:String,
     floor: {
       type: Number,
       required: false
     },
-    images:Stringl
+
     // author:{
     //     authorid:{
     //         type:Number},

@@ -28,7 +28,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }]);
+var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }],()=>{console.log("uploaded")});
 
 router.get("/", (req, res, nest) => {
   res.status(200).json({
@@ -80,17 +80,17 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty", uploadMultiple, async function(req, res) {
+router.post("/addProperty" , uploadMultiple, async function(req, res) {
   console.log(req.body);
   console.log(res.status);
   if (
-    req.body.bhksize === null ||
-    req.body.area === null ||
-    req.body.floor === null
+    req.body.bhksize == null ||
+    req.body.area == null ||
+    req.body.floor == null
   ) {
     res.status(400).json({      message: "wrong input"+req.body.bhksize+req.body.area+req.body.floor    });
   } else {
-    if (images != null) {
+     // if (req.image != null) {
       const _property = new property({
         apartmentType: req.body.apartmentType,
         propertyProfile: req.body.propertyProfile,
@@ -107,7 +107,7 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
-        images: images
+        // images: req.image.path
       });
 
       _property.save((error, data) => {
@@ -115,15 +115,15 @@ router.post("/addProperty", uploadMultiple, async function(req, res) {
           return res.status(400).json({
             message: `${error}`
           });
-        }
-        if (data && req.files) {
+         }
+        // if (data && req.image) {
           return res.status(201).json({
             msg: "added and uploaded",
             data: data
           });
-        }
+        // }
       });
-    }
+    // }
   }
 });
 
