@@ -81,14 +81,14 @@ router.get("/specificProperties", async function(req, res) {
 // , requireSignin
 
 router.post("/addProperty", uploadMultiple, async function(req, res) {
+  console.log(req.body);
+  console.log(res.status);
   if (
-    req.body.bhksize == null ||
-    req.body.area == null ||
-    req.body.floor == null
+    req.body.bhksize === null ||
+    req.body.area === null ||
+    req.body.floor === null
   ) {
-    res.status(400).json({
-      message: "wrong input"+req.body.bhksize+req.body.area+req.body.floor
-    });
+    res.status(400).json({      message: "wrong input"+req.body.bhksize+req.body.area+req.body.floor    });
   } else {
     if (images != null) {
       const _property = new property({

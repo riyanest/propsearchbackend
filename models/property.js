@@ -73,6 +73,7 @@ const property = new mongoose.Schema(
       type: Number,
       required: false
     },
+    images:Stringl
     // author:{
     //     authorid:{
     //         type:Number},
