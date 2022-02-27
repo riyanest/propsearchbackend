@@ -4,7 +4,6 @@ const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
 var multer = require("multer");
-var images = [];
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -23,8 +22,6 @@ var storage = multer.diskStorage({
       filetype = "jpg";
     }
     cb(null, file.fieldname + Date.now() + "." + filetype);
-    images.push(file.fieldname + Date.now() + "." + filetype);
-    console.log(images)
   }
 });
 var upload = multer({ storage: storage });
