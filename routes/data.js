@@ -91,8 +91,7 @@ router.post("/addProperty" , uploadMultiple, async function(req, res) {
   ) {
     res.status(400).json({      message: "wrong input"+req.body.bhksize+req.body.area+req.body.floor    });
   } else {
-      if (req.image != null) {
-      const _property = new property({
+       const _property = new property({
         apartmentType: req.body.apartmentType,
         propertyProfile: req.body.propertyProfile,
         facing: req.body.facing,
@@ -108,9 +107,11 @@ router.post("/addProperty" , uploadMultiple, async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
-        images:images
+ 
       });
-
+      if(req.files){
+        _property.images=req.file.path
+      }
       _property.save((error, data) => {
         if (error) {
           return res.status(400).json({
@@ -124,7 +125,7 @@ router.post("/addProperty" , uploadMultiple, async function(req, res) {
           });
          }
       });
-    }
+    
   }
 });
 
