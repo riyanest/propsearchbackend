@@ -78,7 +78,7 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty" , uploadMultiple, async function(req, res) {
+router.post("/addProperty" , upload.single('image'), async function(req, res) {
   console.log(req.body);
   console.log(res.status);
   if (
