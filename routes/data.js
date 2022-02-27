@@ -108,7 +108,7 @@ router.post("/addProperty" , uploadMultiple, async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
-        images: images
+        images:images
       });
 
       _property.save((error, data) => {
