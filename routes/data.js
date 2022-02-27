@@ -29,7 +29,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }],()=>{console.log("uploaded")});
+var uploadMultiple = upload.fields([{ name: "image", maxCount: 7 }]);
 
 router.get("/", (req, res, nest) => {
   res.status(200).json({
