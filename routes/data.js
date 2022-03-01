@@ -78,7 +78,7 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty" , upload.single('images'), async function(req, res) {
+router.post("/addProperty" , async function(req, res) {
   console.log(req.body);
   console.log(res.status);
   if (
@@ -104,11 +104,8 @@ router.post("/addProperty" , upload.single('images'), async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
- 
+
       });
-      if(req.files){
-        _property.images=req.file.path
-      }
       _property.save((error, data) => {
         if (error) {
           return res.status(400).json({
@@ -117,7 +114,7 @@ router.post("/addProperty" , upload.single('images'), async function(req, res) {
          }
          if (data && req.image) {
           return res.status(201).json({
-            msg: "added and uploaded",
+            msg: "added",
             data: data
           });
          }
@@ -127,9 +124,10 @@ router.post("/addProperty" , upload.single('images'), async function(req, res) {
 });
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
-  if (req.files) {
+  if (req.files&&req.id) {
+    property.updateOne({ : 'Jean-Luc Picard' }, { ship: 'USS Enterprise' });
     return res.status(201).json({
-      msg: "added and uploaded",
+      msg: "uploaded",
       data: req.files
     });
   }
