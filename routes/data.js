@@ -112,7 +112,7 @@ router.post("/addProperty" , async function(req, res) {
             message: `${error}`
           });
          }
-         if (data && req.image) {
+         else {
           return res.status(201).json({
             msg: "added",
             data: data
@@ -124,13 +124,15 @@ router.post("/addProperty" , async function(req, res) {
 });
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
-  if (req.files&&req.id) {
-    property.updateOne({ _id: }, { ship: 'USS Enterprise' });
-    return res.status(201).json({
+  if (req.files&&req.header.id) {
+    property.updateOne({ _id:req.header.id }, { images:req.files }).then(()=>{
+                return res.status(201).json({
+      id:req.header.id,
       msg: "uploaded",
       data: req.files
     });
-  }
+    })
+    }
 });
 
 router.post("/delProperty", requireSignin, async function(req, res) {
