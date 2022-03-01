@@ -125,11 +125,11 @@ router.post("/addProperty" , async function(req, res) {
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
   if (req.files&&req.header.id) {
-    property.updateOne({ _id:req.header.id }, { images:req.files }).then(()=>{
+    property.updateOne({ _id:req.header.id }, { images:req.files.path }).then(()=>{
                 return res.status(201).json({
       id:req.header.id,
       msg: "uploaded",
-      data: req.files
+      data: req.files.path
     });
     })
     }
