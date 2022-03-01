@@ -125,7 +125,7 @@ router.post("/addProperty" , async function(req, res) {
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
   if (req.files&&req.id) {
-    property.updateOne({ : 'Jean-Luc Picard' }, { ship: 'USS Enterprise' });
+    property.updateOne({ _id: }, { ship: 'USS Enterprise' });
     return res.status(201).json({
       msg: "uploaded",
       data: req.files
