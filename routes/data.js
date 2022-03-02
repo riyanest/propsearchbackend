@@ -3,6 +3,7 @@ const express = require("express");
 const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
+const users=require("../models/user");
 var multer = require("multer");
 
 var storage = multer.diskStorage({
@@ -36,7 +37,11 @@ router.get("/", (req, res, nest) => {
 router.get("/allProperties", requireSignin, async function(req, res) {
   const prop = await property.find({}).exec();
   res.status(200).json({ properties: prop });
-  console.log(prop);
+});
+
+router.get("/allUsers", requireSignin, async function(req, res) {
+  const user = await users.find({}).exec();
+  res.status(200).json({ users: user });
 });
 
 router.get("/allpublicProperties", async function(req, res) {
