@@ -141,7 +141,13 @@ router.post("/addPic", uploadMultiple, async function(req, res) {
 });
 
 router.post("/delProperty", requireSignin, async function(req, res) {
-  property.findOneAndDelete({ _id: req.body._id }).exec(error => {
+  property.findOneAndDelete({ _id: req.header.id }).exec(error => {
+    return res.status(401).json({ error });
+  });
+});
+
+router.post("/delUser", requireSignin, async function(req, res) {
+  property.findOneAndDelete({ _id: req.header.id }).exec(error => {
     return res.status(401).json({ error });
   });
 });
