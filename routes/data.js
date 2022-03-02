@@ -141,15 +141,32 @@ router.post("/addPic", uploadMultiple, async function(req, res) {
 });
 
 router.post("/delProperty", requireSignin, async function(req, res) {
-  property.findOneAndDelete({ _id: req.header.id }).exec(error => {
-    return res.status(401).json({ error });
+  property.findOneAndDelete({ _id: req.header.id }).exec((error,data) => {
+    if(error){
+          return res.status(401).json({ error });
+    }
+    else{
+      return res.status(201).json({
+        msg:'deleted',
+        data:data
+      });
+    }
+
   });
 });
 
 router.post("/delUser", requireSignin, async function(req, res) {
-  property.findOneAndDelete({ _id: req.header.id }).exec(error => {
-    return res.status(401).json({ error });
-  });
-});
+    users.findOneAndDelete({ _id: req.header.id }).exec((error,data) => {
+    if(error){
+          return res.status(401).json({ error });
+    }
+    else{
+      return res.status(201).json({
+        msg:'deleted',
+        data:data
+      });
+    }
+
+  });});
 
 module.exports = router;
