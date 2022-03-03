@@ -130,9 +130,8 @@ router.post("/addProperty" , async function(req, res) {
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
   if (req.files&&req.header.id) {
-    var Id=req.header.id
-    property.findByIdAndUpdate({id},{images:req.files.path}, function(err, result){
-
+    let id=req.header.id;
+    property.findByIdAndUpdate({id},{"images":req.files.path}, function(err, result){
         if(err){
             res.send(err)
         }
@@ -147,6 +146,7 @@ router.post("/addPic", uploadMultiple, async function(req, res) {
 router.post("/delProperty", requireSignin, async function(req, res) {
   property.findOneAndDelete({ _id: req.header.id }).exec((error,data) => {
     if(error){
+      
           return res.status(401).json({ error });
     }
     else{
