@@ -130,16 +130,20 @@ router.post("/addProperty" , async function(req, res) {
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
   if (req.files&&req.header.id) {
-    property.updateOne({ _id:req.header.id }, { images:req.files.path }).then(()=>{
-                return res.status(201).json({
-      id:req.header.id,
-      msg: "uploaded",
-      data: req.files.path
-    });
+    var Id=req.header.id
+    property.findByIdAndUpdate({id},{images:req.files.path}, function(err, result){
+
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.send(result)
+        }
+
     })
     }
 });
-
+  
 router.post("/delProperty", requireSignin, async function(req, res) {
   property.findOneAndDelete({ _id: req.header.id }).exec((error,data) => {
     if(error){

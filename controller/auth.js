@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const AppliedUser = require("../models/applieduser");
 const jwt = require("jsonwebtoken");
 const env = require("dotenv");
 const result = env.config();
@@ -24,7 +23,7 @@ exports.signup = (req, res) => {
 
     const { firstName, lastName, email, password } = req.body;
 
-    const _user = new AppliedUser({
+    const _user = new User({
       firstName,
       lastName,
       email,
