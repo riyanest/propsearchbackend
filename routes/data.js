@@ -85,7 +85,7 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty" ,uploadMultiple, async function(req, res) {
+router.post("/addProperty" , async function(req, res) {
   console.log(req.body);
   console.log(res.status);
   
@@ -112,8 +112,6 @@ router.post("/addProperty" ,uploadMultiple, async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
-        images:req.body.images,
-
       });
       _property.save((error, data) => {
         if (error) {
