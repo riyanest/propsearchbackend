@@ -88,6 +88,7 @@ router.get("/specificProperties", async function(req, res) {
 router.post("/addProperty" ,uploadMultiple, async function(req, res) {
   console.log(req.body);
   console.log(res.status);
+  
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
