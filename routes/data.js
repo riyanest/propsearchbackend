@@ -5,13 +5,12 @@ const router = express.Router();
 const property = require("../models/property");
 const users=require("../models/user");
 var multer = require("multer");
-
+let images=[];
 var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public");
-  },
+  destination: "public/",
   filename: (req, file, cb) => {
     console.log(file);
+    img='';
     var filetype = "";
     if (file.mimetype === "image/gif") {
       filetype = "gif";
@@ -22,7 +21,10 @@ var storage = multer.diskStorage({
     if (file.mimetype === "image/jpeg") {
       filetype = "jpg";
     }
-    cb(null, file.fieldname + Date.now() + "." + filetype);
+    img=file.fieldname + Date.now() + "." + filetype
+    images.push(img);
+    cb(null, img);
+
   }
 });
 var upload = multer({ storage: storage });
@@ -83,7 +85,7 @@ router.get("/specificProperties", async function(req, res) {
 });
 // , requireSignin
 
-router.post("/addProperty" , async function(req, res) {
+router.post("/addProperty" ,uploadMultiple, async function(req, res) {
   console.log(req.body);
   console.log(res.status);
   if (
@@ -109,6 +111,7 @@ router.post("/addProperty" , async function(req, res) {
         area: req.body.area,
         floor: req.body.floor,
         ameneties: req.body.ameneties,
+        images:req.body.images,
 
       });
       _property.save((error, data) => {
@@ -129,18 +132,24 @@ router.post("/addProperty" , async function(req, res) {
 });
 
 router.post("/addPic", uploadMultiple, async function(req, res) {
-  if (req.files&&req.header.id) {
-    let id=req.header.id;
-    property.findByIdAndUpdate({id},{"images":req.files.path}, function(err, result){
-        if(err){
-            res.send(err)
-        }
-        else{
-            res.send(result)
-        }
-
-    })
+    console.log(req.body.id,images)
+  if (req.body.id) {
+    let id=req.body.id;
+        property.findByIdAndUpdate(id,
+          {$push:{"images":images}},{new:true,upsert:true}
+          , function(err, result){
+            if(err){
+                res.send(err)
+            }
+            else{ 
+                res.send(result)
+            }
+        })
     }
+    else{
+        console.log(images)
+    }
+    images=[];
 });
   
 router.post("/delProperty", requireSignin, async function(req, res) {
