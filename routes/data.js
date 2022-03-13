@@ -86,10 +86,7 @@ router.get("/specificProperties", async function(req, res) {
 // , requireSignin
 
 router.post("/addProperty" , async function(req, res) {
-  console.log(req.body);
-  console.log(res.status);
-  
-  if (
+    if (
     req.body.bhksize == null ||
     req.body.area == null ||
     req.body.floor == null
@@ -125,8 +122,7 @@ router.post("/addProperty" , async function(req, res) {
             data: data
           });
          }
-      });
-    
+      });  
   }
 });
 
