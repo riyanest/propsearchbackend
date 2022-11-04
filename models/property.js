@@ -29,6 +29,7 @@ const property = new mongoose.Schema(
       type: Date,
       required: true
     },
+    status:{type:Boolean},
     uploaddate: { type: Date, default: Date.now },
     maintainence: {
       type: Number
