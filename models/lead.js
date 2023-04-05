@@ -20,8 +20,10 @@ const lead = new mongoose.Schema(
     bhksize: {
       type: Number,
       required: true
-    }
-    
+    },
+    extraSpeccifications:{
+    type:String
+  },
 
   },
   { timstamp: true }

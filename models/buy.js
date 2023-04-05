@@ -6,33 +6,36 @@ const lead = new mongoose.Schema(
       type:String,
       required:true
     },
+    
     commision:{
       type:String,
       required:true
     },
+    
     apartmentType: {
       type: String,
       required: true
     },
+    
     propertyProfile: {
       type: Object,
       required: true,
-      status: {
-        type: String,
-        required: true
-      },
       price: {
         type: Number,
         required: true
       },
-      rent: Number
     },
+    
     facing: {
       type: String
     },
+    
     floor: Number,
+    
     furnish: String,
+    
     floorinblid: Number,
+
     age: {
       type: Date,
       required: true
@@ -43,10 +46,6 @@ const lead = new mongoose.Schema(
       type: Number
     },
     availabilitydate: Date,
-    public: {
-      type: Boolean,
-      required: true
-    },
     address: {
       type: Object,
       required: true,
@@ -78,21 +77,11 @@ const lead = new mongoose.Schema(
       required: true,
       trim: true
     },
-    images:[{
-      type:String
-    }],
     floor: {
       type: Number,
       required: false
     },
 
-    // author:{
-    //     authorid:{
-    //         type:Number},
-    //     authorname:{type:String},
-    //     authornumber:{type:Number},
-
-    // },
     ameneties: {
       type: Object,
       balcony: Number,
@@ -110,4 +99,4 @@ const lead = new mongoose.Schema(
   { timstamp: true }
 );
 
-module.exports = mongoose.model("lead", lead);
+module.exports = mongoose.model("buy", buy);
