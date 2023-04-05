@@ -1,52 +1,48 @@
 const mongoose = require("mongoose");
 
-const lead = new mongoose.Schema(
+const rental = new mongoose.Schema(
   {
     Name:{
       type:String,
       required:true
     },
+    
     commision:{
       type:String,
       required:true
     },
+    
     apartmentType: {
       type: String,
       required: true
     },
-    propertyProfile: {
-      type: Object,
-      required: true,
-      status: {
-        type: String,
-        required: true
-      },
-      price: {
+    
+      rent: {
         type: Number,
         required: true
       },
-      rent: Number
-    },
+    
     facing: {
       type: String
     },
+    
     floor: Number,
+    
     furnish: String,
+    
     floorinblid: Number,
+
     age: {
       type: Date,
       required: true
     },
-    status:{type:Boolean},
+
     uploaddate: { type: Date, default: Date.now },
+    
     maintainence: {
       type: Number
     },
-    availabilitydate: Date,
-    public: {
-      type: Boolean,
-      required: true
-    },
+    
     address: {
       type: Object,
       required: true,
@@ -69,30 +65,23 @@ const lead = new mongoose.Schema(
         y: Number
       }
     },
+    
     bhksize: {
       type: Number,
       required: true
     },
+    
     area: {
       type: Number,
       required: true,
       trim: true
     },
-    images:[{
-      type:String
-    }],
+    
     floor: {
       type: Number,
       required: false
     },
 
-    // author:{
-    //     authorid:{
-    //         type:Number},
-    //     authorname:{type:String},
-    //     authornumber:{type:Number},
-
-    // },
     ameneties: {
       type: Object,
       balcony: Number,
@@ -110,4 +99,4 @@ const lead = new mongoose.Schema(
   { timstamp: true }
 );
 
-module.exports = mongoose.model("lead", lead);
+module.exports = mongoose.model("rental", rental);

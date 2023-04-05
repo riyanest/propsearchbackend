@@ -1,49 +1,45 @@
 const mongoose = require("mongoose");
 
-const lead = new mongoose.Schema(
+const buy = new mongoose.Schema(
   {
-    Name:{
-      type:String,
-      required:true
+    Name: {
+      type: String,
+      required: true,
     },
-    
-    commision:{
-      type:String,
-      required:true
+
+    commision: {
+      type: String,
+      required: true,
     },
-    
+
     apartmentType: {
       type: String,
-      required: true
-    },
-    
-    propertyProfile: {
-      type: Object,
       required: true,
-      price: {
-        type: Number,
-        required: true
-      },
     },
-    
+
+    price: {
+      type: Number,
+      required: true,
+    },
+
     facing: {
-      type: String
+      type: String,
     },
-    
+
     floor: Number,
-    
+
     furnish: String,
-    
+
     floorinblid: Number,
 
     age: {
       type: Date,
-      required: true
+      required: true,
     },
-    status:{type:Boolean},
+    status: { type: Boolean },
     uploaddate: { type: Date, default: Date.now },
     maintainence: {
-      type: Number
+      type: Number,
     },
     availabilitydate: Date,
     address: {
@@ -51,35 +47,35 @@ const lead = new mongoose.Schema(
       required: true,
       streetAddress: {
         type: String,
-        required: true
+        required: true,
       },
       homeAddress: {
         type: String,
-        required: true
+        required: true,
       },
       location: {
         type: String,
-        required: true
+        required: true,
       },
       cord: {
         type: Object,
         required: true,
         x: Number,
-        y: Number
-      }
+        y: Number,
+      },
     },
     bhksize: {
       type: Number,
-      required: true
+      required: true,
     },
     area: {
       type: Number,
       required: true,
-      trim: true
+      trim: true,
     },
     floor: {
       type: Number,
-      required: false
+      required: false,
     },
 
     ameneties: {
@@ -93,8 +89,8 @@ const lead = new mongoose.Schema(
       city: Boolean,
       garden: Boolean,
       pool: Boolean,
-      gymnasium: Boolean
-    }
+      gymnasium: Boolean,
+    },
   },
   { timstamp: true }
 );
