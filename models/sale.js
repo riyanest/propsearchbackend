@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const buy = new mongoose.Schema(
+const sale = new mongoose.Schema(
   {
     Name: {
       type: String,
@@ -95,4 +95,4 @@ const buy = new mongoose.Schema(
   { timstamp: true }
 );
 
-module.exports = mongoose.model("buy", buy);
+module.exports = mongoose.model("sale", sale);

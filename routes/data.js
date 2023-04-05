@@ -4,7 +4,7 @@ const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
 const lead = require("../models/lead");
-const buy = require("../models/buy");
+const sale = require("../models/sale");
 const rental = require("../models/rental");
 const users = require("../models/user");
 var multer = require("multer");
@@ -101,12 +101,12 @@ router.post("/deleteLead", requireSignin, async function (req, res) {
 
 //buy
 
-router.get("/readBuy", requireSignin, async function (req, res) {
-  const prop = await lead.find({}).exec();
-  res.status(200).json({ properties: prop });
+router.get("/readSale", requireSignin, async function (req, res) {
+  const sale = await sale.find({}).exec();
+  res.status(200).json({ sale: sale });
 });
 
-router.post("/createBuy", async function (req, res) {
+router.post("/createSale", async function (req, res) {
   if (
     req.body.bhksize == null ||
     req.body.area == null ||
@@ -119,7 +119,7 @@ router.post("/createBuy", async function (req, res) {
           "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
       });
   } else {
-    const _lead = new lead({
+    const _sale = new sale({
       name: req.body.name,
       name: req.body.propertyProfile,
       facing: req.body.facing,
@@ -131,7 +131,7 @@ router.post("/createBuy", async function (req, res) {
       area: req.body.area,
       extraSpeccifications: req.body.extraSpeccifications,
     });
-    _lead.save((error, data) => {
+    _sale.save((error, data) => {
       if (error) {
         return res.status(400).json({
           message: `${error}`,
@@ -146,8 +146,8 @@ router.post("/createBuy", async function (req, res) {
   }
 });
 
-router.post("/deleteBuy", requireSignin, async function (req, res) {
-  lead.findOneAndDelete({ _id: req.header.id }).exec((error, data) => {
+router.post("/deleteSale", requireSignin, async function (req, res) {
+  sale.findOneAndDelete({ _id: req.header.id }).exec((error, data) => {
     if (error) {
       return res.status(401).json({ error });
     } else {
@@ -160,6 +160,64 @@ router.post("/deleteBuy", requireSignin, async function (req, res) {
 });
 
 //rent
+
+router.get("/readRental", requireSignin, async function (req, res) {
+  const rental = await rental.find({}).exec();
+  res.status(200).json({ properties: rental });
+});
+
+router.post("/createRental", async function (req, res) {
+  if (
+    req.body.bhksize == null ||
+    req.body.area == null ||
+    req.body.floor == null
+  ) {
+    res
+      .status(400)
+      .json({
+        message:
+          "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+      });
+  } else {
+    const _rental = new rental({
+      name: req.body.name,
+      name: req.body.propertyProfile,
+      facing: req.body.facing,
+      houseType: req.body.houseType,
+      furnish: req.body.furnish,
+      budget: req.body.budget,
+      address: req.body.address,
+      bhksize: req.body.bhksize,
+      area: req.body.area,
+      extraSpeccifications: req.body.extraSpeccifications,
+    });
+    _rental.save((error, data) => {
+      if (error) {
+        return res.status(400).json({
+          message: `${error}`,
+        });
+      } else {
+        return res.status(201).json({
+          msg: "added",
+          data: data,
+        });
+      }
+    });
+  }
+});
+
+router.post("/deleteRental", requireSignin, async function (req, res) {
+  rental.findOneAndDelete({ _id: req.header.id }).exec((error, data) => {
+    if (error) {
+      return res.status(401).json({ error });
+    } else {
+      return res.status(201).json({
+        msg: "deleted",
+        data: data,
+      });
+    }
+  });
+});
 
 //properties
 
