@@ -10,7 +10,7 @@ var storage = multer.diskStorage({
   destination: "public/",
   filename: (req, file, cb) => {
     console.log(file);
-    img='';
+    let img='';
     var filetype = "";
     if (file.mimetype === "image/gif") {
       filetype = "gif";
@@ -36,54 +36,20 @@ router.get("/", (req, res, nest) => {
     message: "hello from server"
   });
 });
+
+//properties
+
 router.get("/allProperties", requireSignin, async function(req, res) {
   const prop = await property.find({}).exec();
   res.status(200).json({ properties: prop });
 });
 
-router.get("/allUsers", requireSignin, async function(req, res) {
-  const user = await users.find({}).exec();
-  res.status(200).json({ users: user });
-});
 
 router.get("/allpublicProperties", async function(req, res) {
   const prop = await property.findOne({ public: true }).exec();
   res.status(200).json({ properties: prop });
   console.log(prop);
 });
-
-router.get("/specificProperties", async function(req, res) {
-  if (req.body.PropertyProfile == "sell") {
-    const prop = await property
-      .find({
-        "propertyProfile.status": req.body.PropertyProfile,
-        "propertyProfile.price": {
-          $lt: req.body.max,
-          $gt: req.body.min
-        },
-        "address.location": req.body.location,
-        apartmentType: req.body.apartmentType
-      })
-      .exec();
-    console.log(prop);
-    res.status(200).json({ properties: prop });
-  } else {
-    const prop = await property
-      .find({
-        "propertyProfile.status": req.body.PropertyProfile,
-        "propertyProfile.rent": {
-          $gt: req.body.min,
-          $lt: req.body.max
-        },
-        "address.location": req.body.location,
-        apartmentType: req.body.apartmentType
-      })
-      .exec();
-    console.log(prop);
-    res.status(200).json({ properties: prop });
-  }
-});
-// , requireSignin
 
 router.post("/addProperty" , async function(req, res) {
     if (
@@ -162,6 +128,46 @@ router.post("/delProperty", requireSignin, async function(req, res) {
 
   });
 });
+
+router.get("/specificProperties", async function(req, res) {
+  if (req.body.PropertyProfile == "sell") {
+    const prop = await property
+      .find({
+        "propertyProfile.status": req.body.PropertyProfile,
+        "propertyProfile.price": {
+          $lt: req.body.max,
+          $gt: req.body.min
+        },
+        "address.location": req.body.location,
+        apartmentType: req.body.apartmentType
+      })
+      .exec();
+    console.log(prop);
+    res.status(200).json({ properties: prop });
+  } else {
+    const prop = await property
+      .find({
+        "propertyProfile.status": req.body.PropertyProfile,
+        "propertyProfile.rent": {
+          $gt: req.body.min,
+          $lt: req.body.max
+        },
+        "address.location": req.body.location,
+        apartmentType: req.body.apartmentType
+      })
+      .exec();
+    console.log(prop);
+    res.status(200).json({ properties: prop });
+  }
+});
+
+// users
+
+router.get("/allUsers", requireSignin, async function(req, res) {
+  const user = await users.find({}).exec();
+  res.status(200).json({ users: user });
+});
+
 
 router.post("/delUser", requireSignin, async function(req, res) {
     users.findOneAndDelete({ _id: req.header.id }).exec((error,data) => {
