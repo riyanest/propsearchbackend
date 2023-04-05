@@ -17,6 +17,7 @@ const lead = new mongoose.Schema(
         type: String,
         required: true
     },
+    status:{type:Boolean},
     bhksize: {
       type: Number,
       required: true
