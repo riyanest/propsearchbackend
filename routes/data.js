@@ -9,7 +9,7 @@ const rental = require("../models/rental");
 const users = require("../models/user");
 var multer = require("multer");
 let images = [];
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: "public/",
   filename: (req, file, cb) => {
     console.log(file);
@@ -52,12 +52,10 @@ router.post("/createLead", async function (req, res) {
     req.body.area == null ||
     req.body.floor == null
   ) {
-    res
-      .status(400)
-      .json({
-        message:
-          "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
-      });
+    res.status(400).json({
+      message:
+        "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+    });
   } else {
     const _lead = new lead({
       name: req.body.name,
@@ -112,12 +110,10 @@ router.post("/createSale", async function (req, res) {
     req.body.area == null ||
     req.body.floor == null
   ) {
-    res
-      .status(400)
-      .json({
-        message:
-          "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
-      });
+    res.status(400).json({
+      message:
+        "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+    });
   } else {
     const _sale = new sale({
       name: req.body.name,
@@ -172,12 +168,10 @@ router.post("/createRental", async function (req, res) {
     req.body.area == null ||
     req.body.floor == null
   ) {
-    res
-      .status(400)
-      .json({
-        message:
-          "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
-      });
+    res.status(400).json({
+      message:
+        "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+    });
   } else {
     const _rental = new rental({
       name: req.body.name,
@@ -238,12 +232,10 @@ router.post("/addProperty", async function (req, res) {
     req.body.area == null ||
     req.body.floor == null
   ) {
-    res
-      .status(400)
-      .json({
-        message:
-          "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
-      });
+    res.status(400).json({
+      message:
+        "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+    });
   } else {
     const _property = new property({
       apartmentType: req.body.apartmentType,
