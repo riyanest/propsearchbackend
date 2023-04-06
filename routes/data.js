@@ -221,7 +221,7 @@ router.get("/allProperties", requireSignin, async function (req, res) {
 });
 
 router.get("/allpublicProperties", async function (req, res) {
-  const prop = await property.findOne({ public: true }).exec();
+  const prop = await property.find({ public: true }).exec();
   res.status(200).json({ properties: prop });
   console.log(prop);
 });
