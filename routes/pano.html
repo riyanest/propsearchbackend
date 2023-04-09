@@ -1,60 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
-    <title>Panolens.js Development Example</title>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
     <style>
-      html, body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background-color: #000;
-      }
-
-      #panolens-separate-container {
-        position: absolute;
-        width: 300px;
-        height: 150px;
-        right: 0;
-        top: 100px;
-      }
-
-      #panolens-separate-container:-webkit-full-screen{
-        left: 0;
-        top: 0;
-      }
-      #panolens-separate-container:-moz-full-screen{
-        left: 0;
-        top: 0;
-      }
-      #panolens-separate-container:-ms-fullscreen{
-        left: 0;
-        top: 0;
-      }
-      #panolens-separate-container:fullscreen {
-        left: 0;
-        top: 0;
-      }
     </style>
   </head>
 
   <body>
-  
-  <script src="../node_modules/three/build/three.min.js"></script>
-  <script src="../build/panolens.js"></script>
-
-
-
-  <div id="panolens-separate-container"></div>
-
+    <div id="app"></div>
+    <div id="remote">
+      <iframe></iframe>
+    </div>
     <script>
-const panorama = new PANOLENS.ImagePanorama( 'asset/equirectangular.jpg' );
-const viewer = new PANOLENS.Viewer();
-viewer.add( panorama );
+    
+const PANOLENS = require("panolens");
 
+var app, panorama, viewer, infospot;
+
+app = document.querySelector("#app");
+
+viewer = new PANOLENS.Viewer({
+  enableReticle: false,
+  container: app,
+  output: "console",
+  viewIndicator: true,
+  autoRotate: true,
+  autoRotateSpeed: 2,
+  autoRotateActivationDuration: 5000,
+  dwellTime: 1000
+});
+
+panorama = new PANOLENS.ImagePanorama(
+  "https://cdn.glitch.global/425409e4-e86e-4938-96ff-5daaa5649a5e/photo-1592761944705-40d554de7b11.jpg?v=1681034752799"
+);
+
+infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+infospot.position.set(0, -2000, -5000);
+
+panorama.add(infospot);
+
+viewer.add(panorama);
+      
     </script>
-
   </body>
 </html>

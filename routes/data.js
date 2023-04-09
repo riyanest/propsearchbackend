@@ -4,6 +4,7 @@ const { requireSignin } = require("../common-middleware");
 const router = express.Router();
 const property = require("../models/property");
 const lead = require("../models/lead");
+const path = require('path');
 const sale = require("../models/sale");
 const rental = require("../models/rental");
 const users = require("../models/user");
@@ -355,6 +356,23 @@ router.post("/delUser", requireSignin, async function (req, res) {
       });
     }
   });
+});
+
+router.use('/', function (req, res, next) {
+ 
+    const options = {
+        root: path.join(__dirname)
+    };
+ 
+    const fileName = 'pano.html';
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
+            next();
+        }
+    });
 });
 
 module.exports = router;
