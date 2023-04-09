@@ -1,4 +1,4 @@
-const PANOLENS = require("panolens");
+ const PANOLENS = require("panolens");
       
 const viewer = new PANOLENS.Viewer({
     container: document.querySelector('#viewer'),
