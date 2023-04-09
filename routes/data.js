@@ -99,6 +99,11 @@ router.post("/deleteLead", requireSignin, async function (req, res) {
 });
 
 //buy
+router.get("/allProperties", requireSignin, async function (req, res) {
+  const prop = await property.find({}).exec();
+  res.status(200).json({ properties: prop });
+});
+
 
 router.get("/readSale", requireSignin, async function (req, res) {
   const sale = await sale.find({}).exec();
@@ -216,10 +221,6 @@ router.post("/deleteRental", requireSignin, async function (req, res) {
 
 //properties
 
-router.get("/allProperties", requireSignin, async function (req, res) {
-  const prop = await property.find({}).exec();
-  res.status(200).json({ properties: prop });
-});
 
 router.get("/allpublicProperties", async function (req, res) {
   const prop = await property.find({ public: true }).exec();
