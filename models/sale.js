@@ -95,4 +95,4 @@ const sale = new mongoose.Schema(
   { timstamp: true }
 );
 
-module.exports = mongoose.model("sale", sale);
+module.exports = mongoose.model("sales", sale);
