@@ -165,7 +165,7 @@ router.post("/deleteSale", requireSignin, async function (req, res) {
 
 router.get("/readRental", requireSignin, async function (req, res) {
   const rental = await rental.find({}).exec();
-  res.status(200).json({ properties: rental });
+  res.status(200).json({ rentals: rental });
 });
 
 router.post("/createRental", async function (req, res) {

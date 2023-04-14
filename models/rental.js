@@ -99,4 +99,4 @@ const rental = new mongoose.Schema(
   { timstamp: true }
 );
 
-module.exports = mongoose.model("rental", rental);
+module.exports = mongoose.model("rentals", rental);
