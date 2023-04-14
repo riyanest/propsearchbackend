@@ -108,7 +108,7 @@ router.get("/allProperties", requireSignin, async function (req, res) {
 router.get("/readSale", requireSignin, async function (req, res) {
   const sales = await sale.find({}).exec();
   res.status(200).json({ sale: sales });
-});
+});  
 
 router.post("/createSale", async function (req, res) {
   if (
