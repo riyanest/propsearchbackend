@@ -43,8 +43,8 @@ router.get("/", (req, res, nest) => {
 //lead
 
 router.get("/readlead", requireSignin, async function (req, res) {
-  const prop = await lead.find({}).exec();
-  res.status(200).json({ properties: prop });
+  const lead = await lead.find({}).exec();
+  res.status(200).json({ leads: lead });
 });
 
 router.post("/createLead", async function (req, res) {
@@ -106,8 +106,8 @@ router.get("/allProperties", requireSignin, async function (req, res) {
 
 
 router.get("/readSale", requireSignin, async function (req, res) {
-  const sale = await sale.find({}).exec();
-  res.status(200).json({ sale: sale });
+  const sales = await sale.find({}).exec();
+  res.status(200).json({ sale: sales });
 });
 
 router.post("/createSale", async function (req, res) {

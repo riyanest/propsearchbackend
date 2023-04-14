@@ -30,4 +30,4 @@ const lead = new mongoose.Schema(
   { timstamp: true }
 );
 
-module.exports = mongoose.model("lead", lead);
+module.exports = mongoose.model("leads", lead);
