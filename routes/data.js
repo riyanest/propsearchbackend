@@ -43,8 +43,8 @@ router.get("/", (req, res, nest) => {
 //lead
 
 router.get("/readlead", requireSignin, async function (req, res) {
-  const lead = await lead.find({}).exec();
-  res.status(200).json({ leads: lead });
+  const leads = await lead.find({}).exec();
+  res.status(200).json({ leads: leads });
 });
 
 router.post("/createLead", async function (req, res) {

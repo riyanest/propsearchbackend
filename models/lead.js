@@ -6,23 +6,20 @@ const lead = new mongoose.Schema(
       type:String,
       required:true
     },
-    facing: {
-      type: String
-    },
     houseType:{
-    type:String,reqired:true},
+    type:String,reqired:true
+    },
     furnish: String,
     budget:{type:String,reqired:true},
     area: {
         type: String,
         required: true
     },
-    status:{type:Boolean},
     bhksize: {
       type: Number,
       required: true
     },
-    extraSpeccifications:{
+    extraSpecifications:{
     type:String
   },
 
