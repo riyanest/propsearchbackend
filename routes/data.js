@@ -23,15 +23,16 @@ var transporter = nodemailer.createTransport({
 
 
 
-router.post("/createLead", async function (req, res) {
+router.post("/mail", async function (req, res) {
   if (
-    req.body.bhksize == null ||
-    req.body.area == null ||
-    req.body.floor == null
+    req.body.from == null ||
+    req.body.to == null ||
+    req.body.subject == null||
+        req.body.text == null
   ) {
     res.status(400).json({
       message:
-        "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+        "wrong input" + req.body.from + req.body.to + req.body.subject+req.body.text
     });
   } else {
 
