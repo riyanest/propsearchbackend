@@ -46,14 +46,17 @@ router.get("/readRevenue", requireSignin, async function (req, res) {
   const sales = await sale.find({}).exec();
     const rentals = await rental.find({}).exec();
   let revenue=0;
+  let deals=0;
   sales.map((val)=>{
     revenue+=val.commision
+    deals++
 })
 rentals.map((val)=>{
     revenue+=val.commision
+  deals++
 })
   
-  res.status(200).json({ revenue: revenue });
+  res.status(200).json({details:{ revenue: revenue,deals:deals }});
   
 });
 
