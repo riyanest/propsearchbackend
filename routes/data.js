@@ -44,12 +44,17 @@ router.get("/", (req, res, nest) => {
 
 router.get("/readRevenue", requireSignin, async function (req, res) {
   const sales = await sale.find({}).exec();
-  res.status(200).json({ sale: sales });
+    const rentals = await rental.find({}).exec();
+  let revenue=0;
+  sales.map((val)=>{
+    revenue+=val.commision
+})
+rentals.map((val)=>{
+    revenue+=val.commision
+})
   
-  const rentals = await rental.find({}).exec();
-  res.status(200).json({ rentals: rentals });
+  res.status(200).json({ revenue: revenue });
   
-  const revenue=1000
 });
 
 router.get("/readlead", requireSignin, async function (req, res) {
