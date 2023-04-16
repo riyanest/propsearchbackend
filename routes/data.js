@@ -1,3 +1,5 @@
+
+var nodemailer = require('nodemailer');
 const { response } = require("express");
 const express = require("express");
 const { requireSignin } = require("../common-middleware");
@@ -10,6 +12,32 @@ const rental = require("../models/rental");
 const users = require("../models/user");
 var multer = require("multer");
 let images = [];
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'Itsgraceproperties@gmail.com',
+    pass: 'Sultana@2023'
+  }
+});
+
+var mailOptions = {
+  from: 'youremail@gmail.com',
+  to: 'myfriend@yahoo.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
+
+
 const storage = multer.diskStorage({
   destination: "public/",
   filename: (req, file, cb) => {
