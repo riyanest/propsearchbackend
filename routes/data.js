@@ -42,6 +42,16 @@ router.get("/", (req, res, nest) => {
 
 //lead
 
+router.get("/readRevenue", requireSignin, async function (req, res) {
+  const sales = await sale.find({}).exec();
+  res.status(200).json({ sale: sales });
+  
+  const rentals = await rental.find({}).exec();
+  res.status(200).json({ rentals: rentals });
+  
+  const revenue=1000
+});
+
 router.get("/readlead", requireSignin, async function (req, res) {
   const leads = await lead.find({}).exec();
   res.status(200).json({ leads: leads });
