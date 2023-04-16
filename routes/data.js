@@ -21,22 +21,42 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-var mailOptions = {
-  from: 'youremail@gmail.com',
-  to: 'myfriend@yahoo.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+
+
+router.post("/createLead", async function (req, res) {
+  if (
+    req.body.bhksize == null ||
+    req.body.area == null ||
+    req.body.floor == null
+  ) {
+    res.status(400).json({
+      message:
+        "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
+    });
+  } else {
+
+    var mailOptions = {
+  from: req.body.from,
+  to: req.body.to,
+  subject: req.body.subject,
+  text: req.body.text
 };
 
 transporter.sendMail(mailOptions, function(error, info){
   if (error) {
-    console.log(error);
+    res.status(400).json({
+     msg:error
+    });
+
   } else {
-    console.log('Email sent: ' + info.response);
+    return res.status(201).json({
+          msg: "Email sent",
+          data: info.response,
+        });
   }
 });
-
-
+  }
+});
 
 const storage = multer.diskStorage({
   destination: "public/",
