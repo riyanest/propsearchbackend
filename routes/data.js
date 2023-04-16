@@ -48,11 +48,11 @@ router.get("/readRevenue", requireSignin, async function (req, res) {
   let revenue=0;
   let deals=0;
   sales.map((val)=>{
-    revenue+=val.commision
+    revenue+=parseInt(val.commision)
     deals++
 })
 rentals.map((val)=>{
-    revenue+=val.commision
+    revenue+=parseInt(val.commision)
   deals++
 })
   
