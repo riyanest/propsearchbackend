@@ -166,7 +166,8 @@ router.post("/deleteLead", requireSignin, async function (req, res) {
 });
 
 //buy
-router.get("/allProperties", requireSignin, async function (req, res) {
+router.get("/allProperties", 
+            async function (req, res) {
   const prop = await property.find({}).exec();
   res.status(200).json({ properties: prop });
 });
