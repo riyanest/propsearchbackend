@@ -298,10 +298,11 @@ router.get("/allpublicProperties", async function (req, res) {
 
 router.post("/addProperty", async function (req, res) {
   if (
-    req.body.bhksize == null ||
-    req.body.area == null ||
+    req.body.Bhksize == null ||
+    req.body.Area == null ||
     req.body.floor == null
   ) {
+    console.log(req.body)
     res.status(400).json({
       message:
         "wrong input" + req.body.bhksize + req.body.area + req.body.floor,
@@ -331,6 +332,7 @@ router.post("/addProperty", async function (req, res) {
           message: `${error}`,
         });
       } else {
+            console.log(req.body)
         return res.status(201).json({
           msg: "added",
           data: data,
