@@ -28,8 +28,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const main = async () => {
-
+router.post("/uploadProp", async function (req, res) {
     // connect to db
     // const mongoDB = process.env.MONGODB_URI; 
     // mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -43,9 +42,17 @@ const main = async () => {
         .on('error', error => console.error(error))
         .on('data', function(data) {
             data['_id'] = new mongoose.Types.ObjectId();
-            data['author'] = new mongoose.Types.(data.author);
+            data['bhk'] = new mongoose.Types.String(data.bhk);
+      data['address'] = new mongoose.Types.String(data.bhk);
+      data['area'] = new mongoose.Types.String(data.area);
+      data['price'] = new mongoose.Types.String(data.price);
+      data['parking'] = new mongoose.Types.String(data.bhk);
+      data['community'] = new mongoose.Types.String(data.bhk);
+      data['name'] = new mongoose.Types.String(data.bhk);
+      data['number'] = new mongoose.Types.String(data.bhk);
+      data['description'] = new mongoose.Types.String(data.description);
+      data['type'] = new mongoose.Types.String(data.type);		
             data['date'] = Date.now();
-            data['published'] = Boolean(data.published);
             prop.push(data);
         })
         .on('end', function(){
@@ -55,16 +62,14 @@ const main = async () => {
                     console.log(err);
                 }
             });
-            console.log(`${posts.length} + posts have been successfully uploaded.`);
+            console.log(`${prop.length} + posts have been successfully uploaded.`);
             return;
         });
-}
 
-main().catch((error) => {
-    console.error(error);
-    process.exit();
+            res.status(200).json({
+    message: "hello from server",
   });
-
+});
 
 router.post("/mail", async function (req, res) {
   if (
