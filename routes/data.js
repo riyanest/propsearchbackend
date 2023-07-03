@@ -37,19 +37,21 @@ router.post("/uploadProp", async function (req, res) {
 
     // read csv file
     const prop = [];
-    fs.createReadStream(path.join(__dirname, '/posts.csv'))
+  let file=req.files.csvfile
+// data.toString('utf8');
+    fs.createReadStream(file)
         .pipe(csv.parse({ headers: true }))
         .on('error', error => console.error(error))
         .on('data', function(data) {
             data['_id'] = new mongoose.Types.ObjectId();
             data['bhk'] = new mongoose.Types.String(data.bhk);
-      data['address'] = new mongoose.Types.String(data.bhk);
+      data['address'] = new mongoose.Types.String(data.address);
       data['area'] = new mongoose.Types.String(data.area);
       data['price'] = new mongoose.Types.String(data.price);
-      data['parking'] = new mongoose.Types.String(data.bhk);
-      data['community'] = new mongoose.Types.String(data.bhk);
-      data['name'] = new mongoose.Types.String(data.bhk);
-      data['number'] = new mongoose.Types.String(data.bhk);
+      data['parking'] = new mongoose.Types.String(data.parking);
+      data['community'] = new mongoose.Types.String(data.community);
+      data['name'] = new mongoose.Types.String(data.name);
+      data['number'] = new mongoose.Types.String(data.number);
       data['description'] = new mongoose.Types.String(data.description);
       data['type'] = new mongoose.Types.String(data.type);		
             data['date'] = Date.now();
