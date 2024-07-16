@@ -6,7 +6,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.js",
+    "vercel-build": "echo hello"
   },
   "engines": {
     "node": "20.x"
@@ -25,7 +26,6 @@
     "node": "^20.3.1",
     "nodemailer": "^6.9.3",
     "nodemon": "^2.0.22",
-    "panolens": "^0.12.1",
-    "vercel": "^34.4.0"
+    "panolens": "^0.12.1"
   }
 }
