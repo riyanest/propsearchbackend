@@ -9,11 +9,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const mongoose = require("mongoose");
 const result = env.config();
-env.config();
 
 mongoose
   .connect(
-    "mongodb+srv://lappy:7MZlsX2l8DylW2GL@propsearchbackend.yohsd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@propsearchbackend.yohsd.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majori ty`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
